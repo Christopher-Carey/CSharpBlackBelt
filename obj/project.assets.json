@@ -12155,11 +12155,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ccare\\Documents\\Coding\\Coding Dojo\\C#\\Belt\\BeltExam\\LoginRegistration.csproj",
+      "projectUniqueName": "c:\\Users\\ccare\\Documents\\Coding\\GIT\\CSharpBlackBelt\\LoginRegistration.csproj",
       "projectName": "LoginRegistration",
-      "projectPath": "C:\\Users\\ccare\\Documents\\Coding\\Coding Dojo\\C#\\Belt\\BeltExam\\LoginRegistration.csproj",
+      "projectPath": "c:\\Users\\ccare\\Documents\\Coding\\GIT\\CSharpBlackBelt\\LoginRegistration.csproj",
       "packagesPath": "C:\\Users\\ccare\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ccare\\Documents\\Coding\\Coding Dojo\\C#\\Belt\\BeltExam\\obj\\",
+      "outputPath": "c:\\Users\\ccare\\Documents\\Coding\\GIT\\CSharpBlackBelt\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
