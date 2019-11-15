@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using BeltExam.Models
+@model List<Outing>
+@{var date=DateTime.Now;}
+<partial name="_navPartial"/>
+<div class="jumbotron">
+    <h1>Hello @ViewBag.Name</h1>
+</div>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date And Time</th>
+        <th>Duration</th>
+        <th>Event Coordinator</th>
+        <th># of Participants</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach(var i in @Model)
+        {
+          @if(i.Date < date)
+          {
+
+          }
+          else
+          {
+
+          
+        <tr>
+          <td><a href="OutingInfoPage/@i.OutingId">@i.Title</a></td>
+          <td>@i.Date  @i.Time</td>
+          <td>@i.Duration @i.DurationType</td>
+          <td>@i.Creator.FirstName</td>
+          <td>@i.OutingUsers.Count</td>
+          @if(@i.Creator.UserId == @ViewBag.CurUser.UserId)
+        {
+          <td><a style="color: red;" asp-action="OutingAction" asp-route-userid="@ViewBag.CurUser.UserId" asp-route-outingid="@i.OutingId" asp-route-status="delete" asp-controller="Belt">Delete</a></td>
+        }
+        else
+        {
+          @if(@i.OutingUsers.Any( r => r.UserId == @ViewBag.CurUser.UserId))
+          {
+            <td><a asp-action="OutingAction" asp-route-userid="@ViewBag.CurUser.UserId" asp-route-outingid="@i.OutingId" asp-route-status="leave" asp-controller="Belt">Leave</a></td>
+          }
+          else
+          {
+            @foreach(var b in @ViewBag.CurUser.MyOutings)
+            {
+              if(b.Outing.Date == i.Date)
+              {
+              
+                <td><a style="color: Gray;" href="#">Have An Event Already</a></td>
+              }
+              else
+              {
+                <td><a style="color: green;" asp-action="OutingAction" asp-route-userid="@ViewBag.CurUser.UserId" asp-route-outingid="@i.OutingId" asp-route-status="join" asp-controller="Belt">Join</a></td>
+              }
+            }
+
+ 
+          }
+        }
+        </tr>
+        }
+        }
+    </tbody>
+  </table>
+
+<a class="btn btn-dark" asp-action="AddOutingPage" asp-controller="Belt">Add</a>

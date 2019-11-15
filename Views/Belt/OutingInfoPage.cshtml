@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using BeltExam.Models
+@model Outing
+<partial name="_navPartial"/>
+<div class="jumbotron">
+    <h1>Hello @ViewBag.Name</h1>
+    <a class="btn btn-secondary" asp-action="LogOut" asp-controller="Home">Log Out</a>
+</div>
+
+<div class="media border p-3">
+  <img src="~/Images/event.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+  <div class="media-body">
+    <h4>@ViewBag.CurOuting.Title <small><i>Posted on @ViewBag.CurOuting.CreatedAt</i></small>
+          @if(@Model.Creator.UserId == @ViewBag.CurUser.UserId)
+        {
+          <td><a class="btn btn-dark" style="color: red;float: right;" asp-action="OutingAction" asp-route-userid="@ViewBag.CurUser.UserId" asp-route-outingid="@Model.OutingId" asp-route-status="delete" asp-controller="Belt">Delete</a></td>
+        }
+        else
+        {
+          @if(@ViewBag.CurOuting.Creator.UserId == @ViewBag.CurUser.UserId)
+          {
+            <td><a class="btn btn-dark" style="float: right;" asp-action="OutingAction" asp-route-userid="@ViewBag.CurUser.UserId" asp-route-outingid="@Model.OutingId" asp-route-status="leave" asp-controller="Belt">Leave</a></td>
+          }
+          else
+          {
+            <td><a class="btn btn-dark" style="color: green;float: right;" asp-action="OutingAction" asp-route-userid="@ViewBag.CurUser.UserId" asp-route-outingid="@Model.OutingId" asp-route-status="join" asp-controller="Belt">Join</a></td>
+          }
+        }
+    </h4>
+    <h5>Event Coordinator: @ViewBag.CurOuting.Creator.FirstName</h5>
+    <p>@ViewBag.CurOuting.Description</p>
+  </div>
+</div>
+
+<div class="card card2">
+  <ul class="list-group ">
+  <li class="list-group-item list-group-item-secondary">Participants:</li>
+  @foreach(var i in @Model.OutingUsers)
+  {
+  <li class="list-group-item">@i.User.FirstName</li>
+  }
+</ul>
+</div>
